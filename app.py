@@ -64,13 +64,14 @@ def inference(all_inputs: dict) -> dict:
         "H": 512,
         "W": 512,
         "f": 8,
-        "ddim_steps": 50,
+        "ddim_steps": model_inputs.get("num_inference_steps", 50),
         "ddim_eta": 0.0,
-        "scale": 7.5,
+        "scale": model_inputs.get("guidance_scale", 7.5),
         "n_samples": 1,
         "skip_save": False,
-        "seed": 1,
+        "seed": model_inputs.get("seed"),
     }
+    print(opt)
 
     wm = "StableDiffusionV1"
     wm_encoder = WatermarkEncoder()
@@ -119,7 +120,9 @@ def inference(all_inputs: dict) -> dict:
                             x_samples_ddim.cpu().permute(0, 2, 3, 1).numpy()
                         )
 
-                        x_checked_image, has_nsfw_concept = check_safety(x_samples_ddim)
+                        # TODO
+                        # x_checked_image, has_nsfw_concept = check_safety(x_samples_ddim)
+                        x_checked_image = x_samples_ddim
 
                         x_checked_image_torch = torch.from_numpy(
                             x_checked_image

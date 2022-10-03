@@ -40,8 +40,10 @@ test(
     "txt2img",
     {
         "modelInputs": {
-            "prompt": "1girl, animal ears, blonde hair, brown shirt, closed mouth, flat color, fox ears, looking at viewer, portrait, shirt, short hair, simple background, slit pupils, solo, upper body, white background, yellow eyes, wolf girl",
-            "seed": 1,
+            # "prompt": "1girl, animal ears, blonde hair, brown shirt, closed mouth, flat color, fox ears, looking at viewer, portrait, shirt, short hair, simple background, slit pupils, solo, upper body, white background, yellow eyes, wolf girl",
+            # "prompt": "fake reality, glitches, indoor liminal space, golden light, greg rutkowski, palm trees, pink door, minimalistic, hyperrealistic surrealism",
+            "seed": 2766839385,
+            "prompt": "1girl,solo,female,robot,android,biochemist,mechanical prosthesis,fashionable pose,sitting on the bedside,hands behind the back,small breasts,dark red eyes,brown hair,Symmetrical hair accessories,long fluffy hair,perfect face,beautiful face,smile,closed mouth,full shot,clear glass covered breasts,core in the middle of the chest,highly detailed body,bedroom",
         },
         "callInputs": {
             "MODEL_ID": "CompVis/stable-diffusion-v1-4",

@@ -36,6 +36,6 @@ EXPOSE 8000
 
 # Runtime vars (for init and inference); fork / downstream specific.
 # ADD APP_VARS.py .
-#***REMOVED***
-#***REMOVED***
+#ENV SEND_URL="***REMOVED***"
+#ENV SIGN_KEY="***REMOVED***"
 CMD conda run --no-capture-output -n ldm python -u server.py

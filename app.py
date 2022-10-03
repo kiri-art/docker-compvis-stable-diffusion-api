@@ -61,8 +61,8 @@ def inference(all_inputs: dict) -> dict:
     opt = {
         "n_iter": 1,
         "C": 4,
-        "H": 512,
-        "W": 512,
+        "H": model_inputs.get("height", 512),
+        "W": model_inputs.get("width", 512),
         "f": 8,
         "ddim_steps": model_inputs.get("num_inference_steps", 50),
         "ddim_eta": 0.0,
@@ -70,7 +70,7 @@ def inference(all_inputs: dict) -> dict:
         "n_samples": 1,
         "skip_save": False,
         "seed": model_inputs.get("seed"),
-        "precision": "full",
+        "precision": "autocast",
     }
     print(opt)
 
@@ -139,7 +139,7 @@ def inference(all_inputs: dict) -> dict:
                                 #     os.path.join("samples", f"{base_count:05}.png")
                                 # )
                                 buffered = BytesIO()
-                                img.save(buffered, format="JPEG")
+                                img.save(buffered, format="PNG")
                                 image_base64 = base64.b64encode(
                                     buffered.getvalue()
                                 ).decode("utf-8")

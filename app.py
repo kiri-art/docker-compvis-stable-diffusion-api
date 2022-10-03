@@ -16,7 +16,7 @@ import base64
 from io import BytesIO
 import json
 from pytorch_lightning import seed_everything
-
+from contextlib import nullcontext
 
 CONFIG_FILE = "configs/stable-diffusion/v1-inference.yaml"
 
@@ -25,7 +25,7 @@ def init():
     global model  # needed for bananna optimizations
     config = OmegaConf.load(CONFIG_FILE)
 
-    model = load_model_from_config(config, "/models/model-epoch07-float16.ckpt")
+    model = load_model_from_config(config, "/models/model-epoch07-full.ckpt")
     model.cuda()
     model.eval()
 
@@ -70,6 +70,7 @@ def inference(all_inputs: dict) -> dict:
         "n_samples": 1,
         "skip_save": False,
         "seed": model_inputs.get("seed"),
+        "precision": "full",
     }
     print(opt)
 
@@ -84,8 +85,7 @@ def inference(all_inputs: dict) -> dict:
 
     seed_everything(opt["seed"])
 
-    # precision_scope = autocast if opt.precision == "autocast" else nullcontext
-    precision_scope = autocast
+    precision_scope = autocast if opt["precision"] == "autocast" else nullcontext
     with torch.no_grad():
         with precision_scope("cuda"):
             with model.ema_scope():

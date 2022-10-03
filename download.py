@@ -28,7 +28,7 @@ def load_model_from_config(config, ckpt, verbose=False):
 
 def main():
     config = OmegaConf.load(CONFIG_FILE)
-    model = load_model_from_config(config, "/models/model-epoch07-float16.ckpt")
+    model = load_model_from_config(config, "/models/model-epoch07-full.ckpt")
 
 
 if __name__ == "__main__":

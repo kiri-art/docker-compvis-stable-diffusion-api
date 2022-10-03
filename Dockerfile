@@ -18,7 +18,7 @@ RUN conda run --no-capture-output -n ldm \
 
 #RUN mkdir -p models/ldm/stable-diffusion-v1
 RUN mkdir -p /models
-RUN wget --show-progress --progress=bar:force https://huggingface.co/hakurei/waifu-diffusion-v1-3/resolve/main/model-epoch07-float16.ckpt -P /models
+RUN wget --show-progress --progress=bar:force https://huggingface.co/hakurei/waifu-diffusion-v1-3/resolve/main/model-epoch07-full.ckpt -P /models
 
 ADD txt2img.py .
 ADD download.py .
